@@ -18,3 +18,8 @@ void saveFile(SLL *);
 void addEnd(SLL **);
 void readFile(SLL **);
 void addMiddle(SLL **);
+void reverse_print(SLL *);
+void print_rec(SLL*);
+void rev_rec(SLL *);
+void delete_all(SLL **);
+void search_node(SLL *);

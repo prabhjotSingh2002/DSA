@@ -33,8 +33,8 @@ void main()
             //         break;
             case 's': stud_show(headptr);
                     break;
-            // case m: printf("m/M : modify a record\n");
-            //         break;
+            case 'm': stud_mod(headptr);
+                    break;
             case 'v': stud_save(headptr);
                     break;
             case 'e':end_prog(headptr);
@@ -299,4 +299,76 @@ void delete_all(Student **ptr)
         del=*ptr;
     }
     printf("all records are deleted\n");
+}
+
+void stud_mod(Student *ptr)
+{
+    if(*ptr==0)
+    {
+        printf("NO RECORD PRESENT\n");
+        return;
+    }
+
+    printf("Enter which record to search for modification\nR/r:to search a roll no\nN/n:to search a name\nP/p:percentage based\n");
+    
+    char op;
+    scanf(" %c",&op);
+
+    if(op>='A' && op<='Z')
+    {
+        op=op^32;
+    }
+
+    if(op=='r')
+    {
+        int roll;
+        printf("Enter roll no.\n");
+        scanf("%d",&roll);
+
+        while(ptr)
+        {
+            if(ptr->roll==roll)
+            {
+                
+            }
+            ptr=ptr->next;//moving ptr
+        }
+        printf("Roll No. not found\n");
+    }
+    else if(op=='n')
+    {
+        char name[40];
+        printf("Enter name\n");
+        scanf(" %s",name);
+
+        while(ptr)
+        {
+            if(strcmp(ptr->name,name)==0)
+            {
+                
+            }
+            ptr=ptr->next;//moving ptr
+        }
+        printf("Name not found\n");
+    }
+    else if(op=='p')
+    {
+        float per;
+        printf("Enter percentage\n");
+        scanf("%f",&per);
+
+        while(ptr)
+        {
+            if(ptr->per==per)
+            {
+                
+            }
+            ptr=ptr->next;//moving ptr
+        }
+        printf("Percentage not found\n");
+    }
+    else 
+    {
+        printf("INVALID OPTION\n");        
+    }
 }

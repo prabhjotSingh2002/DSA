@@ -23,3 +23,5 @@ void print_rec(SLL*);
 void rev_rec(SLL *);
 void delete_all(SLL **);
 void search_node(SLL *);
+void reverse_link(SLL **);
+void sort_data(SLL * ptr);

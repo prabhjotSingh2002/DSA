@@ -19,4 +19,4 @@ int record_count(Student *ptr);
 char *lowercase(char *s);
 void init(Student **ptr);
 void delete_all(Student **ptr);
-void stud_mod(Student **ptr);
+void stud_mod(Student *ptr);

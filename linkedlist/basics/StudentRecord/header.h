@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<unistd.h>
 
 typedef struct student{
     int roll;
@@ -20,3 +21,6 @@ char *lowercase(char *s);
 void init(Student **ptr);
 void delete_all(Student **ptr);
 void stud_mod(Student *ptr);
+Student * makeChange(Student *ptr);
+void del_stud(Student **ptr);
+void reverse_links(Student **ptr);

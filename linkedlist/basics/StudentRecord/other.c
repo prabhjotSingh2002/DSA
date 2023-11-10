@@ -16,6 +16,7 @@ char *lowercase(char *s)
 void init(Student **ptr)
 {
     stud_read(ptr);
+    stud_sort(*ptr,0);
 }
 
 void reverse_links(Student **ptr)

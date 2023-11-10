@@ -24,7 +24,7 @@ int record_count(Student *ptr)
     {
         return 0;
     }
-    int c=1;
+    int c=0;
     while(ptr)
     {
        c++;

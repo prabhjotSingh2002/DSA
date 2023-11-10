@@ -28,7 +28,6 @@ void main()
         switch(op)
         {
             case 'a': stud_add(&headptr);
-                        sleep(1);
                         break;  
             case 'd':  stud_show(headptr);
                         del_stud(&headptr);
@@ -44,15 +43,17 @@ void main()
                         break;
             case 'e':end_prog(headptr);
                         break;
-            case 't': stud_sort(headptr);
-                        sleep(1);
-                        stud_show(headptr);
+            case 't': stud_sort(headptr,1);
+                      sleep(1);
+                      stud_show(headptr);
+                      stud_sort(headptr,0);
                         break;
             case 'l':delete_all(&headptr);
                         stud_show(headptr);
                         break;
             case 'r':reverse_links(&headptr);
                         stud_show(headptr);
+                        stud_sort(headptr,0);
                      break;
             default: printf("invalid choice\n");
                      break;

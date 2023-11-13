@@ -12,7 +12,7 @@ void stud_mod(Student *ptr)
 
     printf("Enter which record to search for modification\nR/r:to search a roll no\nN/n:to search a name\nP/p:percentage based\n");
     
-    Student ***arr;
+    Student **arr[20];
     int idx=0;
 
     char op;
@@ -25,6 +25,7 @@ void stud_mod(Student *ptr)
 
     if(op=='r')
     {
+        idx=0;
         int roll;
         printf("Enter roll no.\n");
         scanf("%d",&roll);
@@ -35,7 +36,7 @@ void stud_mod(Student *ptr)
             {
                 flag=1;
                 idx++;
-                arr=realloc(arr,sizeof(Student**)*idx);
+                //arr=realloc(arr,sizeof(Student**)*idx);
                 arr[idx-1]=&ptr;
                 //ptr=makeChange(ptr);
             }
@@ -44,10 +45,11 @@ void stud_mod(Student *ptr)
         if(flag==0)
             printf("Roll No. not found\n");
 
-        recordRecieved(arr,idx);
+   //     recordRecieved(arr,idx);
     }
     else if(op=='n')
     {
+        idx=0;
         char name[40];
         printf("Enter name\n");
         scanf(" %s",name);
@@ -61,19 +63,19 @@ void stud_mod(Student *ptr)
 
                 flag=1;
                 idx++;
-                arr=realloc(arr,sizeof(Student**)*idx);
+               // arr=realloc(arr,sizeof(Student**)*idx);
                 arr[idx-1]=&ptr;
-
             }
             ptr=ptr->next;//moving ptr
         }
         if(flag==0)
             printf("Name not found\n");
 
-        recordRecieved(arr,idx);
+     //   recordRecieved(arr,idx);
     }
     else if(op=='p')
     {
+        idx=0;
         float per;
         printf("Enter percentage\n");
         scanf("%f",&per);
@@ -87,7 +89,7 @@ void stud_mod(Student *ptr)
 
                 flag=1;
                 idx++;
-                arr=realloc(arr,sizeof(Student**)*idx);
+                //arr=realloc(arr,sizeof(Student**)*idx);
                 arr[idx-1]=&ptr;
             }
             ptr=ptr->next;//moving ptr
@@ -95,12 +97,18 @@ void stud_mod(Student *ptr)
         if(flag==0)
          printf("Percentage not found\n");
 
-        recordRecieved(arr,idx);
+       // recordRecieved(arr,idx);
     }
     else 
     {
         printf("INVALID OPTION\n");        
     }
+    //printf("hi......%d %d\n",idx,(*(arr[0]))->roll);
+    int i;
+   /* for(i=0;i<idx;i++)
+    {
+             printf("RECORD ENCOUNTERD:%d %s  %f \n",(*arr[i])->roll,(*arr[i])->name,(*arr[i])->per);
+    }*/
     return;
 }
 

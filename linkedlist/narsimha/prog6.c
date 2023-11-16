@@ -26,6 +26,23 @@ other node is pointing to the current node and we can say a loop exists.
 Continue this process for all the nodes of the linked list.
 */
 
+/*
+Problem-10 Can we solve the Problem-6 in O(n)? 
+Solution: Yes. Efficient Approach (Memoryless Approach): 
+This problem was solved by Floyd. The solution is named the Floyd cycle finding algorithm.
+It uses two pointers moving at different speeds to walk the linked list. Once they enter 
+the loop they are expected to meet, which denotes that there is a loop. This works because
+the only way a faster moving pointer would point to the same location as a slower moving
+pointer is if somehow the entire list or a part of it is circular. Think of a tortoise and 
+a hare running on a track. The faster running hare will catch up with the tortoise if they
+are running in a loop. As an example, consider the following example and trace out the 
+Floyd algorithm. From the diagrams below we can see that after the final step they are
+ meeting at some point in the loop which may not be the starting point of the loop.
+
+
+Note: slowPtr (tortoise) moves one pointer at a time and fastPtr (hare) moves two pointers at a time.
+*/
+
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -43,7 +60,7 @@ void info(Node *hptr);
 void display(Node *hptr);
 
 void findLoop(Node *hptr);
-
+void findLoop2(Node *hptr);
 
 void main()
 {
@@ -101,7 +118,7 @@ void main()
             case 6:system("cls");break;
             case 7:printf("count =%d\n",count(head));break;
             case 8:info(head);break;
-            case 9:findLoop(head);break;
+            case 9:findLoop2(head);break;
 
             default:printf("WRONG OPTION\n");
         }
@@ -284,6 +301,27 @@ void findLoop(Node *hptr)
 
         arr[c]=ptr;
 
+        printf("%d. DATA: %d \n",++c,ptr->data);
+        ptr=ptr->next;
+    }
+}
+
+void findLoop2(Node *hptr)
+{
+    if(hptr==0)
+    {
+        printf("No Record\n");
+        return;
+    }
+    Node *ptr=hptr;
+    int c=0;
+
+    Node *hptr1=ptr;
+    Node *ptr1=hptr1;
+    
+    
+    while(ptr)
+    {
         printf("%d. DATA: %d \n",++c,ptr->data);
         ptr=ptr->next;
     }

@@ -62,69 +62,6 @@ void display(Node *hptr);
 void findLoop(Node *hptr);
 void findLoop2(Node *hptr);
 
-void main()
-{
-    int op;
-    Node *head=0;
-    Node *ptr=malloc(sizeof(Node));
-    ptr->data=1;
-    head=ptr;
-
-    ptr->next=malloc(sizeof(Node));
-    ptr=ptr->next;
-    ptr->data=2;
-
-    ptr->next=malloc(sizeof(Node));
-    ptr=ptr->next;
-    Node *ptr1=ptr;
-    ptr->data=3;
-
-    ptr->next=malloc(sizeof(Node));
-    ptr=ptr->next;
-    ptr->data=4;
-
-    ptr->next=malloc(sizeof(Node));
-    ptr=ptr->next;
-    ptr->data=5;
-
-    ptr->next=malloc(sizeof(Node));
-    ptr=ptr->next;
-    ptr->data=6;
-
-    ptr->next=malloc(sizeof(Node));
-    ptr=ptr->next;
-    ptr->data=7;
-
-    ptr->next=malloc(sizeof(Node));
-    ptr=ptr->next;
-    ptr->data=8;
-    ptr->next=ptr1;
-
-    while(1)
-    {
-        printf("ENTER THE OPTION:\n");
-        printf("1.add at end\n2.add at begin \n3.delete at end \n4.delete from begin\n");
-        printf("5.Display \n6.clrscr\n7.total count\n8.info of nth node\n");
-        printf("9.findloop\n");
-        printf("op: ");
-        scanf("%d",&op);
-        switch(op)
-        {
-            case 1:addEnd(&head);break;
-            case 2:addBeg(&head);break;
-            case 3:delEnd(&head);break;
-            case 4:delBeg(&head);break;
-            case 5:display(head);break;
-            case 6:system("cls");break;
-            case 7:printf("count =%d\n",count(head));break;
-            case 8:info(head);break;
-            case 9:findLoop2(head);break;
-
-            default:printf("WRONG OPTION\n");
-        }
-    }
-}
-
 void addEnd(Node **hptr)
 {
     Node *new=malloc(sizeof(Node));
@@ -319,12 +256,179 @@ void findLoop2(Node *hptr)
     
     while((fastPtr!=NULL) &&(fastPtr->next!=NULL) )
     {
-        if(fastPtr==slowPtr)
+      
+        slowPtr=slowPtr->next;
+        fastPtr=fastPtr->next->next;
+          if(fastPtr==slowPtr)
         {
             printf("LOOP IS THERE\n");
             break;
         }
-        slowPtr=slowPtr->next;
-        fastPtr=fastPtr->next->next;
     }
 }
+
+
+/*
+prog11: check whether the given linked list is 
+either NULL terminated or not.if there is a 
+cycle find the start node of loop
+*/
+
+void findBeginOfLoop(Node *head)
+{
+
+    if(head==0)
+    {
+        printf("EMPTY LIST\n");
+        return;
+    }
+    Node *slowPtr,*fastPtr;
+    slowPtr=fastPtr=head;
+
+    int flag=0;
+
+    while(fastPtr!=NULL && fastPtr->next!=NULL)
+    {
+        slowPtr=slowPtr->next;
+        fastPtr=fastPtr->next->next;
+        if(slowPtr==fastPtr)
+        {
+            flag=1;
+            printf("LOOP is there\n");
+            printf("slowptr currently at DATA: %d\n",slowPtr->data);
+            break;
+        }
+    }
+
+    if(flag==1)
+    {
+        slowPtr=head;
+        while(slowPtr!=fastPtr)
+        {
+            fastPtr=fastPtr->next;
+            slowPtr=slowPtr->next;
+        }
+    }
+
+    printf("LOOP start at %d\n",slowPtr->data);
+
+}
+
+
+void main()
+{
+    int op;
+    Node *head=0;
+    Node *ptr=malloc(sizeof(Node));
+    ptr->data=1;
+    head=ptr;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=2;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    Node *ptr1=ptr;
+    ptr->data=3;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=4;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=5;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=6;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=7;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=8;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=9;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=10;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=11;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=12;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=13;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=14;
+
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=15;
+
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=16;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=17;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=18;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=19;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=20;
+
+    ptr->next=malloc(sizeof(Node));
+    ptr=ptr->next;
+    ptr->data=21;
+    ptr->next=ptr1->next->next->next;
+
+    while(1)
+    {
+        printf("ENTER THE OPTION:\n");
+        printf("1.add at end\n2.add at begin \n3.delete at end \n4.delete from begin\n");
+        printf("5.Display \n6.clrscr\n7.total count\n8.info of nth node\n");
+        printf("9.findloop\n10)loop begin\n");
+        printf("op: ");
+        scanf("%d",&op);
+        switch(op)
+        {
+            case 1:addEnd(&head);break;
+            case 2:addBeg(&head);break;
+            case 3:delEnd(&head);break;
+            case 4:delBeg(&head);break;
+            case 5:display(head);break;
+            case 6:system("cls");break;
+            case 7:printf("count =%d\n",count(head));break;
+            case 8:info(head);break;
+            case 9:findLoop2(head);break;
+            case 10:findBeginOfLoop(head);  break;
+            default:printf("WRONG OPTION\n");
+        }
+    }
+}
+

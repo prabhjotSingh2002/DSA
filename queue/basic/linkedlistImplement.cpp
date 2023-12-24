@@ -6,6 +6,12 @@ class ListNode
     public:
     int data;
     ListNode * next;
+
+    ListNode()
+    {
+        data=0;
+        next=NULL;
+    }
 };
 
 class Queue
@@ -17,11 +23,12 @@ class Queue
     Queue ()
     {
         ListNode *temp=new ListNode();
-        front=rear=NULL;
+        front=new ListNode();
+        rear=new ListNode();
     }
     int isEmptyQueue()
     {
-        return front==NULL;
+        return (front->next==NULL)?1:0;
     }
     void enque(int data)
     {
@@ -30,7 +37,7 @@ class Queue
         newNode->next=NULL;
         rear->next=newNode;
         rear=newNode;
-        if(front==NULL)
+        if(front->next==NULL)
             front=rear;
     }
 
@@ -58,11 +65,20 @@ class Queue
         ListNode *temp;
         while(this)
         {
-            temp=this;
-            this=this->next;
+            temp=this->front;
+            this->front=(this->front)->next;
             delete temp;
         }
         delete this;
     }
 
 };
+
+int main()
+{
+    Queue a;
+    if(a.isEmptyQueue()!=0)
+    {
+        cout<<"Empty Queue"<<endl;
+    }
+}

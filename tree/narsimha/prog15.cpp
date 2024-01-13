@@ -2,7 +2,7 @@
 #include<climits>
 using namespace std;
 
-/*ALGORITHM TO DELETE A NODE OF TREE & FIND NO. of LEAFNODE */
+/*ALGORITHM TO FIND FULL NODES & HALF NODE IN A TREE */
 
 
 //defining binary node
@@ -871,6 +871,55 @@ class BTree
             cout<<"NO RECORD FOUND!!!"<<endl;
         }
     }
+
+    int countFullNode(int i=0)
+    {
+        return countFullNode(this->head,i);
+    }
+
+    static int countFullNode(BNode *root,int i)
+    {
+        Queue q1;
+        int c1=0,c2=0,c3=0;
+        BNode *temp;
+        q1.enque(root);
+        while(!q1.isEmptyQueue())
+        {
+            temp=q1.dequeue();
+            if(temp->left!=NULL && temp->right!=NULL)
+            {
+                c1++;
+            }
+            if(temp->left==NULL && temp->right==NULL)
+            {
+                c2++;
+            }
+            if(temp->left==NULL && temp->right!=NULL)
+            {
+                c3++;
+            }
+            if(temp->left!=NULL && temp->right==NULL)
+            {
+                c3++;
+            }
+            if(temp->left)
+            {
+                q1.enque(temp->left);
+            }
+            if(temp->right)
+            {
+                q1.enque(temp->right);
+            }
+        }
+
+        if(i==0)
+            return c1;
+        else if(i==1)
+            return c2;
+
+        return c3;
+    }
+
 };
 
 int main()
@@ -883,7 +932,7 @@ int main()
         cout<<"\n1.to insert\n2.inorder\n3.preorder\n4.postorder\n5.level order\n6.maximum ele\n";
         cout<<"7.search node\n8.Size of tree\n9.reverse Level Order\n10.deleteTree\n";
         cout<<"11.Hieght/depth of tree\n12.deepest Node\n13.count leaf node\n14. DeleteNode\n";
-        cout<<"15.Find Parent";
+        cout<<"15.Find Parent\n16.Full Node Count\n17.Half Node Count";
         cout<<"\nENTER : ";
         cin>>op;
         switch(op)
@@ -952,8 +1001,33 @@ int main()
                         cout<<"Parent Node not EXIST"<<endl;
                     }
                     break;
+            case 16:cout<<"Count of full Node-->"<<obj.countFullNode()<<endl;
+                    break;
+            case 17:cout<<"Count of half Node-->"<<obj.countFullNode(2)<<endl;
+                    break;
             default:printf("ENTER CORRECT OP\n");
         }
     }
 }
 
+
+
+// char s1[]="abc";
+// char s2[]="pqrs";
+// char s3[10]={0};
+// int i=0,j=0,k=0;
+// while(1)
+// {
+//     if(s1[i])
+//     {
+//         s3[k++]=s1[i++];
+//     }
+//     if(s2[j])
+//     {
+//         s3[k++]=s2[j++];
+//     }
+//     if(s[i]==NULL && s[j]==NULL)
+//     {
+//         break;
+//     }
+// }

@@ -3,7 +3,7 @@
 using namespace std;
 
 
-/*ALGORITHM TO FIND DIAMETER OR WIDTH OF A TREE */
+/*ALGORITHM TO FIND THE LEVEL WHICH IS HAVING MAXIMUM SUM IN OF A TREE */
 
 
 //defining binary node
@@ -940,6 +940,51 @@ class BTree
         }
     } 
 
+    int levelWithMaxSum()
+    {
+        return levelWithMaxSum(this->head);
+    }
+
+    static int levelWithMaxSum(BNode *root)
+    {
+        Queue q1;
+        int currS=0,maxS=0;
+        int maxLevel=0,level=0;
+        BNode *temp;
+        q1.enque(root);
+        q1.enque(NULL);
+        while(!q1.isEmptyQueue())
+        {
+            temp=q1.dequeue();
+            if(temp==NULL)
+            {
+                if(currS>maxS)
+                {
+                    maxS=currS;
+                    maxLevel=level;
+                }
+                currS=0; 
+                level++;
+                if(!q1.isEmptyQueue())
+                    q1.enque(NULL);
+            }
+            else
+            {
+                currS=currS+temp->data;
+                if(temp->left)
+                {
+                    q1.enque(temp->left);
+                }
+                if(temp->right)
+                {
+                    q1.enque(temp->right);
+                }
+            }
+        }
+        cout<<"maximum sum -->"<<maxS<<endl;
+        return maxLevel;
+    }
+
 };
 
 int main()
@@ -953,6 +998,7 @@ int main()
         cout<<"7.search node\n8.Size of tree\n9.reverse Level Order\n10.deleteTree\n";
         cout<<"11.Hieght/depth of tree\n12.deepest Node\n13.count leaf node\n14. DeleteNode\n";
         cout<<"15.Find Parent\n16.Full Node Count\n17.Half Node Count\n18.Diameter/Width of tree\n";
+        cout<<"19.Find the level with maximum sum\n";
         cout<<"\nENTER : ";
         cin>>op;
         switch(op)
@@ -1026,6 +1072,8 @@ int main()
             case 17:cout<<"Count of half Node-->"<<obj.countFullNode(2)<<endl;
                     break;
             case 18:cout<<"DIAMETER /Width of tree-->"<<obj.findDiameter()<<endl;
+                    break;
+            case 19:cout<<"Level with maximum sum-->"<<obj.levelWithMaxSum()<<endl;
                     break;
             default:printf("ENTER CORRECT OP\n");
         }

@@ -3,8 +3,8 @@
 using namespace std;
 
 
-/*ALGORITHM TO FIND DIAMETER OR WIDTH OF A TREE */
-
+/*ALGORITHM TO PRINT EACH PATH IN A TREE */
+/*ALGORITHM FOR CHECKING THE EXISTENCE OF PATH  WITH A GIVEN SUM IN A TREE */
 
 //defining binary node
 class BNode
@@ -940,6 +940,114 @@ class BTree
         }
     } 
 
+    int levelWithMaxSum()
+    {
+        return levelWithMaxSum(this->head);
+    }
+
+    static int levelWithMaxSum(BNode *root)
+    {
+        Queue q1;
+        int currS=0,maxS=0;
+        int maxLevel=0,level=0;
+        BNode *temp;
+        q1.enque(root);
+        q1.enque(NULL);
+        while(!q1.isEmptyQueue())
+        {
+            temp=q1.dequeue();
+            if(temp==NULL)
+            {
+                if(currS>maxS)
+                {
+                    maxS=currS;
+                    maxLevel=level;
+                }
+                currS=0; 
+                level++;
+                if(!q1.isEmptyQueue())
+                    q1.enque(NULL);
+            }
+            else
+            {
+                currS=currS+temp->data;
+                if(temp->left)
+                {
+                    q1.enque(temp->left);
+                }
+                if(temp->right)
+                {
+                    q1.enque(temp->right);
+                }
+            }
+        }
+        cout<<"maximum sum -->"<<maxS<<endl;
+        return maxLevel;
+    }
+
+    void printPath()
+    {
+        int *p=new int[30]{0};
+        printPath(this->head,p,0);
+    }
+    static void printPath(BNode *root, int p[],int pathlength)
+    {
+        if(root==NULL)
+            return;
+        
+        //append this node to path array
+        p[pathlength]=root->data;
+        pathlength++;
+
+        if(root->left==NULL && root->right==NULL)
+        {
+            printArray(p,pathlength);
+        }
+        else
+        {
+            printPath(root->left,p,pathlength);
+            printPath(root->right,p,pathlength);
+        }
+
+    }
+    static void printArray(int *arr,int len)
+    {
+        int i=0;
+        while(i<len)
+        {
+            cout<<"--"<<arr[i]<<"--";
+            i++;
+        }
+        cout<<endl;
+    }
+
+    int pathSumExist(int sum)
+    {
+       return pathSumExist(this->head,sum);
+    }
+    static int pathSumExist(BNode *root,int sum)
+    {
+        if(root==NULL)
+        {
+            return (sum==0);
+        }
+        else
+        {
+            sum=sum-root->data;
+            if((root->left==NULL && root->right==NULL)||(root->left && root->right))
+            {
+                return pathSumExist(root->left,sum)||pathSumExist(root->right,sum);
+            }
+            else if(root->left)
+            {
+                return pathSumExist(root->left,sum);
+            }
+            else
+            {
+                return pathSumExist(root->right,sum);
+            }
+        }
+    }
 };
 
 int main()
@@ -953,6 +1061,8 @@ int main()
         cout<<"7.search node\n8.Size of tree\n9.reverse Level Order\n10.deleteTree\n";
         cout<<"11.Hieght/depth of tree\n12.deepest Node\n13.count leaf node\n14. DeleteNode\n";
         cout<<"15.Find Parent\n16.Full Node Count\n17.Half Node Count\n18.Diameter/Width of tree\n";
+        cout<<"19.Find the level with maximum sum\n20.print Path\n21.Check if thegiven input is sum of path exist\n";
+
         cout<<"\nENTER : ";
         cin>>op;
         switch(op)
@@ -1027,6 +1137,22 @@ int main()
                     break;
             case 18:cout<<"DIAMETER /Width of tree-->"<<obj.findDiameter()<<endl;
                     break;
+            case 19:cout<<"Level with maximum sum-->"<<obj.levelWithMaxSum()<<endl;
+                    break;
+            case 20:obj.printPath();
+                    cout<<endl;
+                    break;
+            case 21: cout<<"enter sum: ";
+                     cin>>data;
+                     if(obj.pathSumExist(data)!=0)
+                     {
+                        cout<<"PATH EXIST"<<endl;
+                     }
+                     else
+                     {
+                        cout<<"PATH NOT EXIST"<<endl;
+                     }
+                     break;
             default:printf("ENTER CORRECT OP\n");
         }
     }
